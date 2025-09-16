@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Produtos para Indústria Óleo & Gás</title>
+    <title>Painel de Produtos para NATIONAL OILWELL VARCO DO BRASIL LTDA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
@@ -17,7 +17,7 @@
 
     <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-2xl p-8 mb-8">
         <header class="text-center mb-10">
-            <h1 class="text-5xl font-extrabold text-gray-900 leading-tight">Painel de Produtos para <span class="text-orange-500">Indústria Óleo & Gás</span></h1>
+            <h1 class="text-5xl font-extrabold text-gray-900 leading-tight">Painel de Produtos para <span class="text-orange-500">NATIONAL OILWELL VARCO DO BRASIL LTDA</span></h1>
             <p class="mt-4 text-xl text-gray-500 font-light">Catálogo interativo de pastas e graxas.</p>
         </header>
 
@@ -37,7 +37,8 @@
         </div>
 
         <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            </div>
+            <!-- Product cards will be injected here by JavaScript -->
+        </div>
 
         <div class="mt-8 text-center">
             <a href="https://wa.me/5511965140920" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all transform hover:scale-105" target="_blank">
@@ -108,8 +109,8 @@
               "name": "620 GOLD PLUS",
               "type": "Composto / Pasta",
               "aditive": "Complexo de Cálcio",
-              "description": "Composto antiengripante e selante, à base de complexo de cálcio. Resistente à temperatura de até 650°C intermitentes.",
-              "application": "Indicado para partes rosqueadas ou de encaixe de componentes e de tubulações em perfurações petrolíferas, evitando engripamento e corrosão. Recomendado para poços profundos por sua resistência à água e à extrema pressão.",
+              "description": "Composto antiengripante e selante, à base de complexo de cálcio. Resistente à temperatura de até 650°C intermitentes.",
+              "application": "Indicado para partes rosqueadas ou de encaixe de componentes e de tubulações em perfurações petrolíferas, evitando engripamento e corrosão. Recomendado para poços profundos por sua resistência à água e à extrema pressão.",
               "main_benefit": "Evita engripamento e corrosão em poços profundos."
             },
             {
@@ -214,7 +215,7 @@
                     <h3 class="text-xl font-bold text-gray-900 mb-2">${product.name}</h3>
                     <div class="flex flex-wrap text-sm font-medium text-white mb-4">
                         <span class="bg-gray-800 rounded-full px-3 py-1 mr-2 mb-2">${product.type}</span>
-                        ${product.aditive !== "N/A" ? <span class="bg-orange-500 rounded-full px-3 py-1 mb-2">${product.aditive}</span> : ''}
+                        ${product.aditive !== "N/A" ? `<span class="bg-orange-500 rounded-full px-3 py-1 mb-2">${product.aditive}</span>` : ''}
                     </div>
                     <p class="text-gray-700 text-sm font-semibold mb-2">Benefício Principal:</p>
                     <p class="text-gray-600 text-sm italic mb-4">${product.main_benefit}</p>
