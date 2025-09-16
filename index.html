@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Produtos para Indústria Óleo & Gás</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+
+    <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-2xl p-8 mb-8">
+        <header class="text-center mb-10">
+            <h1 class="text-5xl font-extrabold text-gray-900 leading-tight">Painel de Produtos para <span class="text-orange-500">Indústria Óleo & Gás</span></h1>
+            <p class="mt-4 text-xl text-gray-500 font-light">Catálogo interativo de pastas e graxas.</p>
+        </header>
+
+        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 mb-8">
+            <div class="w-full md:w-1/2">
+                <label for="filter-type" class="block text-sm font-medium text-gray-700">Filtrar por Tipo</label>
+                <select id="filter-type" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm rounded-md shadow-sm">
+                    <option value="">Todos os Tipos</option>
+                </select>
+            </div>
+            <div class="w-full md:w-1/2">
+                <label for="filter-aditive" class="block text-sm font-medium text-gray-700">Filtrar por Aditivo</label>
+                <select id="filter-aditive" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm rounded-md shadow-sm">
+                    <option value="">Todos os Aditivos</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+
+        <div class="mt-8 text-center">
+            <a href="https://wa.me/5511965140920" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all transform hover:scale-105" target="_blank">
+                Fale com especialista
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const products = [
+            {
+              "name": "XTREME 30",
+              "type": "Composto / Pasta",
+              "aditive": "Cobre",
+              "description": "Composto cobreado antiengripante para aço inoxidável. Resistência a temperatura de até 1100°C.",
+              "application": "Aplicado em superfícies aquecidas, não escorre ou goteja; para uso em parafusos, porcas, prisioneiros, pinos, plug etc. Protege contra corrosão e ferrugem, não é afetado por produtos como óleos ou solventes. Com larga aplicação em campos petrolíferos, para uso inclusive em locais cujos componentes possam estar com temperaturas elevadas ou em presença de vapor.",
+              "main_benefit": "Proteção contra corrosão e ferrugem em alta temperatura."
+            },
+            {
+              "name": "XTREME K / XTREME K PREMIUM",
+              "type": "Composto / Pasta",
+              "aditive": "Cobre",
+              "description": "Composto antiengripante e selante, à base de cobre, para perfurações petrolíferas. Resistente a temperaturas de até 982°C.",
+              "application": "É apropriado para uso em partes flangeadas, juntas e conexões rosqueadas ou de encaixe de componentes e tubulações utilizados em perfurações petrolíferas, evitando engripamento e corrosão. É recomendado também para utilização em poços profundos por sua resistência a água e extrema pressão.",
+              "main_benefit": "Ideal para poços profundos, resistente à água e extrema pressão."
+            },
+            {
+              "name": "620 GOLD",
+              "type": "Composto / Pasta",
+              "aditive": "N/A",
+              "description": "Composto antiengripante para temperaturas extremas. Resistente à temperatura de até 1370°C intermitentes.",
+              "application": "Evita engripamento e corrosão, recomendado para partes rosqueadas ou de encaixe de componentes e tubulações de perfurações petrolíferas. Garante montagens e desmontagens mais rápidas e seguras.",
+              "main_benefit": "Resistência a temperaturas extremas e facilidade na montagem e desmontagem."
+            },
+            {
+              "name": "NICKEL SHIELD",
+              "type": "Composto / Pasta",
+              "aditive": "Níquel Coloidal",
+              "description": "Composto antiengripante de níquel coloidal para temperaturas extremas. Resistente a temperatura de até 1427°C intermitentes.",
+              "application": "Recomendado para situações em que não se pode usar materiais à base de cobre. É inerte e resistente à corrosão, amônia e outros produtos químicos agressivos, com uso em refinarias, indústria petroquímica, e indústrias de energia.",
+              "main_benefit": "Inerte e resistente a produtos químicos agressivos."
+            },
+            {
+              "name": "Z-40/50/60",
+              "type": "Composto / Pasta",
+              "aditive": "Zinco",
+              "description": "Pastas antiengripantes à base de zinco. Resistente a temperatura de até 145°C intermitentes.",
+              "application": "Oferecem extrema proteção para juntas rosqueadas sob variadas condições de serviço, facilitando as desmontagens após o uso.",
+              "main_benefit": "Facilita a desmontagem de juntas rosqueadas."
+            },
+            {
+              "name": "NAC 6000",
+              "type": "Composto / Pasta",
+              "aditive": "N/A",
+              "description": "Pasta para montagem e desmontagem de tubulações petrolíferas. Resistente as temperaturas maiores de 650°C intermitentes.",
+              "application": "Fornece máxima proteção contra engripamento e travamento na montagem de tubos de perfuração.",
+              "main_benefit": "Máxima proteção contra engripamento e travamento."
+            },
+            {
+              "name": "NAC 3000",
+              "type": "Composto / Pasta",
+              "aditive": "N/A",
+              "description": "Pasta auxiliar na vedação para montagem e desmontagem de tubulações petrolíferas. Resistente a temperaturas de até 260°C intermitentes.",
+              "application": "Excelente proteção contra engripamento e travamento. Fornece máxima proteção na montagem dos tubos de perfuração.",
+              "main_benefit": "Proteção e auxílio na vedação de tubulações petrolíferas."
+            },
+            {
+              "name": "620 GOLD PLUS",
+              "type": "Composto / Pasta",
+              "aditive": "Complexo de Cálcio",
+              "description": "Composto antiengripante e selante, à base de complexo de cálcio. Resistente à temperatura de até 650°C intermitentes.",
+              "application": "Indicado para partes rosqueadas ou de encaixe de componentes e de tubulações em perfurações petrolíferas, evitando engripamento e corrosão. Recomendado para poços profundos por sua resistência à água e à extrema pressão.",
+              "main_benefit": "Evita engripamento e corrosão em poços profundos."
+            },
+            {
+              "name": "XTREME SPRAY",
+              "type": "Óleo / Graxa / Spray",
+              "aditive": "MoS₂",
+              "description": "Lubrificante molibdênizado (MoS₂) e micropulverizado de secagem rápida. Anti corrosão e anti oxidante.",
+              "application": "Aplicações em roscas, pequenas engrenagens, matrizes (como desmoldante), machos, pequenas correntes, hastes e pistões válvulas, eixos de comando, parafusos e gabaritos de montagem.",
+              "main_benefit": "Lubrificação de secagem rápida com proteção anticorrosiva."
+            },
+            {
+              "name": "EZY WAY 25",
+              "type": "Composto / Pasta",
+              "aditive": "Sintético",
+              "description": "Pasta sintética auxiliar na selagem de válvulas. Resistente à temperatura de até 260°C intermitentes.",
+              "application": "Selante para Válvulas Gaveta, recomendado para válvulas que requeiram resistência a hidrocarbonetos alifáticos ou em contato com temperaturas extremamente baixas e altas.",
+              "main_benefit": "Selagem eficaz para válvulas com resistência a variações de temperatura e produtos químicos."
+            },
+            {
+              "name": "XTREME 50",
+              "type": "Composto / Pasta",
+              "aditive": "MoS₂",
+              "description": "Composto antiengripante, anticorrosivo e antioxidante, com altíssimo teor de MoS₂.",
+              "application": "Altamente eficiente como antiengripante, aplicado em qualquer superfície metálica, como flanges, porcas e parafusos, mandris, válvulas, eixos, etc.",
+              "main_benefit": "Reduz o atrito e previne o contato metal-com-metal."
+            },
+            {
+              "name": "XTREME H",
+              "type": "Óleo / Graxa / Spray",
+              "aditive": "MoS₂",
+              "description": "Graxa mineral especial molibdenizada para engrenagens e cabos de aço. Resistente à temperatura de até 190°C intermitentes.",
+              "application": "Altamente resistente à água e umidade, sendo ideal para navios, plataformas de perfuração e equipamentos navais. Recomendada para movimentos lentos e cargas elevadas.",
+              "main_benefit": "Alta resistência à água e umidade, ideal para ambientes marinhos."
+            },
+            {
+              "name": "XTREME W-G",
+              "type": "Composto / Pasta",
+              "aditive": "PTFE e Grafite",
+              "description": "Composto lubrificante e selante com alto teor de lubricidade para roscas e flanges. Resistente a temperatura de até 260°C.",
+              "application": "Auxilia na vedação de flanges, tampas flangeadas, caixas de óleo, etc.",
+              "main_benefit": "Auxilia na vedação de flanges e roscas."
+            },
+            {
+              "name": "XTREME W – SINTETIC",
+              "type": "Composto / Pasta",
+              "aditive": "Sintético",
+              "description": "Composto vedante com alto teor de lubricidade para roscas e flanges. Resistente a temperaturas de até 260°C intermitentes.",
+              "application": "Recomendada para tubulações que contenham ácidos, aromáticos, gases petrolíferos, combustíveis, salmoura, solventes, óleos, vapor, cáusticos, GLP, alcalinos, butano, amônia, propano, corrosivos.",
+              "main_benefit": "Resistente a uma ampla gama de produtos químicos corrosivos."
+            },
+            {
+              "name": "ARIXEN ZYN SEAL",
+              "type": "Composto / Pasta",
+              "aditive": "Sintético",
+              "description": "Composto sintético selante especial. Resistente a temperatura de -30 a 310°C.",
+              "application": "Recomendado para campos de petróleo, refinarias, indústrias petroquímicas, de energia, químicas e marinhas.",
+              "main_benefit": "Oferece resistência química e estabilidade mecânica em altas temperaturas."
+            },
+            {
+              "name": "XTREME 202",
+              "type": "Óleo / Graxa / Spray",
+              "aditive": "Bissulfeto de Molibdênio",
+              "description": "Graxa mineral especial à base de Bissulfeto de Molibdênio para rolamentos. Resistente à temperatura de até 135°C intermitentes.",
+              "application": "Indicado para aplicações automotivas e industriais, como graxeiras, rolamentos pré-selados, e lubrificação geral de motores. Recomendado para máquinas, guindastes, veículos e equipamentos de plataformas de perfuração petrolífera.",
+              "main_benefit": "Lubrificação geral para rolamentos e equipamentos em plataformas."
+            },
+            {
+              "name": "XTREME AP-5",
+              "type": "Óleo / Graxa / Spray",
+              "aditive": "Molibdenizada",
+              "description": "Graxa molibidenizada multiuso resistente a temperatura de até 190°C intermitentes.",
+              "application": "Recomendada para plataformas de petróleo, aplicações navais, dragas e equipamentos industriais pesados.",
+              "main_benefit": "Multiuso, ideal para ambientes pesados e de alta temperatura."
+            },
+            {
+              "name": "T-145 RED",
+              "type": "Óleo / Graxa / Spray",
+              "aditive": "Semissintético",
+              "description": "Graxa semissintética impermeável para aplicações petrolíferas. Resistente à temperatura de até 160°C intermitentes.",
+              "application": "Especialmente formulada para condições subaquáticas e ambientes com extrema umidade.",
+              "main_benefit": "Impermeável, ideal para uso subaquático e em ambientes úmidos."
+            },
+            {
+              "name": "TSV WHITE",
+              "type": "Óleo / Graxa / Spray",
+              "aditive": "N/A",
+              "description": "Graxa de cor branca com excelente resistência à oxidação, à ação da água e a cargas elevadas. Resistente à temperatura de -10 a 134°C.",
+              "application": "Pode ser aplicada em rolamentos, placas de torno, mancais de máquinas, peças de automóveis, motos, barcos, equipamentos náuticos, eletrodomésticos e uso geral.",
+              "main_benefit": "Resistência à oxidação, água e cargas elevadas."
+            }
+        ];
+
+        const getUniqueValues = (key) => {
+            const values = products.map(p => p[key]);
+            const uniqueValues = [...new Set(values)];
+            return uniqueValues.sort();
+        };
+
+        const renderProductCard = (product) => {
+            return `
+                <div class="bg-white rounded-lg shadow-md p-6 transform transition duration-300 hover:scale-105 hover:shadow-xl border border-gray-200">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">${product.name}</h3>
+                    <div class="flex flex-wrap text-sm font-medium text-white mb-4">
+                        <span class="bg-gray-800 rounded-full px-3 py-1 mr-2 mb-2">${product.type}</span>
+                        ${product.aditive !== "N/A" ? <span class="bg-orange-500 rounded-full px-3 py-1 mb-2">${product.aditive}</span> : ''}
+                    </div>
+                    <p class="text-gray-700 text-sm font-semibold mb-2">Benefício Principal:</p>
+                    <p class="text-gray-600 text-sm italic mb-4">${product.main_benefit}</p>
+                    <p class="text-gray-500 text-xs">${product.description}</p>
+                </div>
+            `;
+        };
+
+        const renderProducts = (filteredProducts) => {
+            const productListDiv = document.getElementById('product-list');
+            productListDiv.innerHTML = filteredProducts.map(renderProductCard).join('');
+        };
+
+        const populateFilters = () => {
+            const typeSelect = document.getElementById('filter-type');
+            const aditiveSelect = document.getElementById('filter-aditive');
+
+            getUniqueValues('type').forEach(type => {
+                const option = document.createElement('option');
+                option.value = type;
+                option.textContent = type;
+                typeSelect.appendChild(option);
+            });
+
+            getUniqueValues('aditive').forEach(aditive => {
+                const option = document.createElement('option');
+                option.value = aditive;
+                option.textContent = aditive;
+                aditiveSelect.appendChild(option);
+            });
+        };
+
+        const handleFilterChange = () => {
+            const selectedType = document.getElementById('filter-type').value;
+            const selectedAditive = document.getElementById('filter-aditive').value;
+
+            const filteredProducts = products.filter(product => {
+                const typeMatch = selectedType === "" || product.type === selectedType;
+                const aditiveMatch = selectedAditive === "" || product.aditive === selectedAditive;
+                return typeMatch && aditiveMatch;
+            });
+            renderProducts(filteredProducts);
+        };
+
+        // Event Listeners
+        document.getElementById('filter-type').addEventListener('change', handleFilterChange);
+        document.getElementById('filter-aditive').addEventListener('change', handleFilterChange);
+
+        // Initial render
+        window.onload = () => {
+            populateFilters();
+            renderProducts(products);
+        };
+    </script>
+</body>
+</html>
